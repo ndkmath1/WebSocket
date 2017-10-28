@@ -1,0 +1,8 @@
+#ignore target
+target
+
+#ignore .idea
+.idea
+
+#ignore iml
+WebSocket.iml
