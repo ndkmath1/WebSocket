@@ -48,8 +48,8 @@ public class SimpleEchoSocket
         {
             Future<Void> fut;
             int i = 0;
-            while (i < 20000) {
-                fut = session.getRemote().sendStringByFuture("Hello");
+            while (i < 50000) {
+                fut = session.getRemote().sendStringByFuture(i + ": Hello server11111111111111111111111111111111111Hello server 11111111111111111111111111111111111");
                 fut.get(1, TimeUnit.MICROSECONDS); // wait for send to complete.
                 ++i;
             }
