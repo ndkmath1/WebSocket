@@ -11,7 +11,6 @@ public class WebSocketTest3 {
     public static final int MIN = 8000;
     public static final int MAX = 8002;
 
-
     public static void main(String[] args) {
 //        Runnable runnable = new Runnable() {
 //            @Override

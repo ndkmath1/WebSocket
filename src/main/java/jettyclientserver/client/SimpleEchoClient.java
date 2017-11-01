@@ -1,6 +1,5 @@
 package jettyclientserver.client;
 
-
 import java.net.URI;
 import java.util.concurrent.TimeUnit;
 
@@ -12,6 +11,10 @@ import org.eclipse.jetty.websocket.client.WebSocketClient;
  */
 public class SimpleEchoClient
 {
+
+    private static long startTime;
+    private static long stopTime;
+
     public static void main(String[] args)
     {
         String destUri = "ws://127.0.0.1:8000/";
@@ -19,20 +22,19 @@ public class SimpleEchoClient
         {
             destUri = args[0];
         }
-
         WebSocketClient client = new WebSocketClient();
         SimpleEchoSocket socket = new SimpleEchoSocket();
         try
         {
             client.start();
-
             URI echoUri = new URI(destUri);
             ClientUpgradeRequest request = new ClientUpgradeRequest();
             client.connect(socket,echoUri,request);
-            System.out.printf("Connecting to : %s%n",echoUri);
-
+//            System.out.printf("Connecting to : %s%n",echoUri);
+            startTime = System.currentTimeMillis();
+            System.out.println("Start time: " + startTime);
             // wait for closed socket connection.
-            socket.awaitClose(5,TimeUnit.SECONDS);
+            socket.awaitClose(100, TimeUnit.SECONDS);
         }
         catch (Throwable t)
         {
@@ -43,6 +45,9 @@ public class SimpleEchoClient
             try
             {
                 client.stop();
+                stopTime = System.currentTimeMillis();
+                long elapsedTime = stopTime - startTime;
+                System.out.println("elapsedTime = " + elapsedTime);
             }
             catch (Exception e)
             {

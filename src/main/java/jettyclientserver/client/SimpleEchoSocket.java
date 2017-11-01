@@ -47,11 +47,15 @@ public class SimpleEchoSocket
         try
         {
             Future<Void> fut;
-            fut = session.getRemote().sendStringByFuture("Hello");
-            fut.get(2,TimeUnit.SECONDS); // wait for send to complete.
+            int i = 0;
+            while (i < 20000) {
+                fut = session.getRemote().sendStringByFuture("Hello");
+                fut.get(1, TimeUnit.MICROSECONDS); // wait for send to complete.
+                ++i;
+            }
 
-            fut = session.getRemote().sendStringByFuture("Thanks for the conversation.");
-            fut.get(2,TimeUnit.SECONDS); // wait for send to complete.
+//            fut = session.getRemote().sendStringByFuture("Thanks for the conversation.");
+//            fut.get(2,TimeUnit.SECONDS); // wait for send to complete.
 
             session.close(StatusCode.NORMAL,"I'm done");
         }

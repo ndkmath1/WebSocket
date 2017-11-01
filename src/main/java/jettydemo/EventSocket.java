@@ -25,7 +25,7 @@ public class EventSocket extends WebSocketAdapter
         super.onWebSocketText(message);
 //        System.out.println("Received TEXT message: " + message);
         try {
-            remoteEndpoint.sendString("Received TEXT message: ");
+            remoteEndpoint.sendString("Received TEXT message: "  + message);
         } catch (IOException e) {
             e.printStackTrace();
         }
